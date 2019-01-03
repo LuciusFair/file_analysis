@@ -64,12 +64,15 @@ if args.input:
 
     my_infile = args.input
 else:
-    my_infile = "/tmp/textfile.txt.bfe"
+    #my_infile = "/tmp/textfile.txt.bfe"
+    print "No suitable file found. Please check the Syntax with the -h option."
+    exit(2)
 
 if args.output:
     my_outfile = args.output
 else:
-    my_outfile = my_infile + '.bmp'
+    #my_outfile = my_infile + '.bmp'
+    my_outfile = '/tmp/file_analyzer.bmp'
 
 with open(my_infile, 'rb') as my_file:
     my_file.seek(0, 2)
@@ -126,5 +129,9 @@ with open(my_infile, 'rb') as my_file:
 # Uncomment next line to show pic after generation
 #my_bild.show()
 
-
-my_bild.save(my_outfile)
+try:
+    my_bild.save(my_outfile)
+    print "Image saved as %s" % (my_outfile)
+except:
+    print "Sorry, Image couldn't be saved - check filenames and permissions."
+    exit(8)
